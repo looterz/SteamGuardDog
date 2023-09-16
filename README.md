@@ -4,13 +4,19 @@
 
 SteamGuardDog is a utility tool designed to automate the process of logging into Steam via SteamCmd with multi-factor authentication (MFA) enabled. The tool fetches the MFA code from a Gmail account and uses it to proceed with the login, saving you the time and effort of having to manually enter the code yourself which can be especially useful for CI/CD pipelines or automated build setups.
 
-## Quick Start: Download Binaries
-
-For a hassle-free experience, pre-compiled binaries for SteamGuardDog are available on the [Releases page](https://github.com/your_username/SteamGuardDog/releases). Just download the appropriate version for your operating system and architecture, update `credentials.json` and `config.json` as outlined below and you're good to go!
-
 ## Why?
 
 Manually entering MFA codes can be time-consuming, especially for CI/CD pipelines or automated build setups. This tool simplifies the login process by automating MFA code retrieval and input.
+
+## Quick Start
+
+For a hassle-free experience, pre-compiled binaries for SteamGuardDog are available on the [Releases page](https://github.com/your_username/SteamGuardDog/releases). Just download the appropriate version for your operating system and architecture, update `credentials.json` and `config.json` as outlined below. 
+
+Upon the initial startup, a browser window will open and prompt you to authenticate with your Gmail account. Once you've done that, you can use SteamGuardDog just like you would use SteamCmd. For example:
+
+```bash
+./SteamGuardDog.exe +login username password +run_app_build /path/to/appconfig.vdf +quit
+```
 
 ## Installation Instructions
 
@@ -18,7 +24,7 @@ Manually entering MFA codes can be time-consuming, especially for CI/CD pipeline
 - [Go](https://golang.org/dl/) installed on your system (Version >= 1.16)
 - [SteamCmd](https://developer.valvesoftware.com/wiki/SteamCMD) installed
 - A Gmail account for receiving Steam Guard codes and the Gmail API setup correctly, instructions below
-#### Gmail API Setup
+### Gmail API Setup
 
   - Visit the [Google Cloud Console](https://console.developers.google.com/)
   - Create a new project or use an existing one.
