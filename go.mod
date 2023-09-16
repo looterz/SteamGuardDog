@@ -1,6 +1,6 @@
 module SteamGuardDog
 
-go 1.21.1
+go 1.21
 
 require (
 	golang.org/x/oauth2 v0.12.0
