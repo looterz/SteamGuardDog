@@ -191,16 +191,25 @@ func main() {
 
 	args := os.Args[1:]
 
-	for {
-		fmt.Println("Running SteamCmd with given arguments: ", args)
-
-		// always append +quit to the end of the arguments if its not already there
-		if len(args) == 0 || args[len(args)-1] != "+quit" {
-			args = append(args, "+quit")
+	// Check if +quit is already present and remove it if it is as we add it later
+	quitIndex := -1
+	for i, arg := range args {
+		if arg == "+quit" {
+			quitIndex = i
+			break
 		}
+	}
+	if quitIndex != -1 {
+		args = append(args[:quitIndex], args[quitIndex+1:]...)
+	}
 
+	for {
 		var stderr, stdout bytes.Buffer // Buffers to capture stderr and stdout
-		cmd := exec.Command(config.SteamCmdPath, args...)
+		cmd := exec.Command(config.SteamCmdPath)
+		cmd.Args = append(cmd.Args, args...)
+		cmd.Args = append(cmd.Args, "+quit") // Add +quit to the end of the arguments to make sure SteamCmd quits after running the given arguments, must always be the very last argument
+
+		fmt.Println("Running SteamCmd with given arguments: ", cmd.Args)
 
 		// Use MultiWriter to write to both stdout and the buffer
 		cmd.Stdout = io.MultiWriter(os.Stdout, &stdout)
@@ -216,17 +225,27 @@ func main() {
 					if code != "" {
 						fmt.Printf("Fetched Steam Guard code: %s\n", code)
 
-						// Append the Steam Guard code to the arguments and try again but only if its not already present, if it is already present - update it
-						if len(args) == 0 || args[len(args)-1] != "+set_steam_guard_code" {
-							args = append(args, "+set_steam_guard_code", code)
+						// Check if +set_steam_guard_code is already present
+						steamGuardIndex := -1
+						for i, arg := range args {
+							if arg == "+set_steam_guard_code" {
+								steamGuardIndex = i
+							}
+						}
+
+						// Append the Steam Guard code to the arguments or update it
+						if steamGuardIndex != -1 {
+							args[steamGuardIndex+1] = code
 						} else {
-							fmt.Println("Steam Guard code already present in arguments. Updating to new code", code)
-							args[len(args)-1] = code
+							args = append(args, "+set_steam_guard_code", code)
 						}
 
 						break
+					} else {
+						fmt.Println("No Steam Guard code found. Waiting 10 seconds...")
 					}
-					time.Sleep(5 * time.Second)
+
+					time.Sleep(10 * time.Second)
 				}
 			} else {
 				fmt.Println("Error running SteamCmd:", err)
