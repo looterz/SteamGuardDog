@@ -137,7 +137,18 @@ func getClient() (*gmail.Service, error) {
 func readConfig() Configuration {
 	configFile, err := os.Open("config.json")
 	if err != nil {
-		log.Fatal(err)
+		if os.IsNotExist(err) {
+			// Create a default config.json file if it doesn't exist
+			defaultConfig := Configuration{
+				SteamCmdPath: "./steamcmd/steamcmd.exe",
+			}
+			err := createDefaultConfigFile(defaultConfig)
+			if err != nil {
+				log.Fatalf("Error creating default config file: %v", err)
+			}
+			return defaultConfig
+		}
+		log.Fatalf("Error opening config file: %v", err)
 	}
 	defer configFile.Close()
 
@@ -145,9 +156,25 @@ func readConfig() Configuration {
 	config := Configuration{}
 	err = decoder.Decode(&config)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("Error decoding config file: %v", err)
 	}
 	return config
+}
+
+func createDefaultConfigFile(config Configuration) error {
+	configFile, err := os.Create("config.json")
+	if err != nil {
+		return err
+	}
+	defer configFile.Close()
+
+	encoder := json.NewEncoder(configFile)
+	encoder.SetIndent("", "    ")
+	err = encoder.Encode(config)
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 func fetchSteamGuardCode(srv *gmail.Service) string {
