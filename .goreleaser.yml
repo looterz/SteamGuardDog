@@ -1,0 +1,27 @@
+# .goreleaser.yml
+before:
+  hooks:
+    - go mod download
+    - go generate ./...
+
+builds:
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+    flags:
+      - -trimpath
+
+archives:
+  - format: zip
+    name_template: "{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}"
+    files:
+      - none*  # override default, which is to include all files from directory
+    extra_files:
+      - glob: '*.json'
+      - glob: '*.md'
+      - glob: 'LICENSE'

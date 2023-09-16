@@ -8,6 +8,15 @@
 *.so
 *.dylib
 
+# Steamcmd test installation
+steamcmd/
+
+# Cached token file for Gmail
+token.json
+
+# Credentials file for Gmail
+credentials.json
+
 # Test binary, built with `go test -c`
 *.test
 
