@@ -1,25 +1,10 @@
-# .goreleaser.yml
-release:
-  github:
-    owner: looterz
-    name: SteamGuardDog
-
-before:
-  hooks:
-    - go mod download
-    - go generate ./...
-
+project_name: SteamGuardDog
 builds:
-  # your build configuration...
-
-archives:
-  - format: zip
-    name_template: "{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}"
-    files:
-      - extra_files # specify the name of the section below
-
-# Add this section to specify the additional files
-extra_files:
-  - glob: '*.json'
-  - glob: '*.md'
-  - glob: 'LICENSE' # Include the LICENSE file
+  - env: [CGO_ENABLED=0]
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
