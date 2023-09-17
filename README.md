@@ -2,7 +2,7 @@
 
 ## Overview
 
-SteamGuardDog is a utility tool designed to automate the process of logging into Steam via SteamCmd with multi-factor authentication (MFA) enabled. The tool fetches the MFA code from a Gmail account and uses it to proceed with the login, saving you the time and effort of having to manually enter the code yourself which can be especially useful for CI/CD pipelines or automated build setups.
+SteamGuardDog is a utility tool designed to automate the process of logging into Steam via SteamCmd with multi-factor authentication (MFA) enabled. The tool fetches the MFA code from a Gmail account and uses it to proceed with the login if prompted, saving you the time and effort of having to manually enter the code yourself which can be especially useful for CI/CD pipelines or automated build setups.
 
 ## Why?
 
