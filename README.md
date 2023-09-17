@@ -84,7 +84,7 @@ Upon the initial startup, a browser window will open and prompt you to authentic
 
 2. Make sure that `credentials.json` is correctly configured to use a GCP Project that you've made to authenticate with Gmail, as described in the [Gmail API Setup](#gmail-api-setup) section above.
 
-2. You can use SteamGuardDog just like you would use SteamCmd. For example:
+2. Use SteamGuardDog just like you would use SteamCmd. For example:
 
 ```bash
 ./SteamGuardDog.exe +login username password +run_app_build /path/to/appconfig.vdf +quit
