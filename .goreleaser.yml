@@ -12,3 +12,7 @@ archives:
     format_overrides:
       - goos: windows
         format: zip
+    files:
+      - "*.md"
+      - "LICENSE"
+      - "*.json"
