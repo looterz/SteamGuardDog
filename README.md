@@ -75,7 +75,7 @@ Upon the initial startup, a browser window will open and prompt you to authentic
 
 ## Usage
 
-1. Configure the `config.json` file with the correct path to `steamcmd.exe` on your machine. Example:
+1. Optionally create and update a `config.json` file with the correct path to `steamcmd.exe` on your machine. This is automatically generated if not already present with the default path below. Example:
     ```json
     {
         "steamcmd_path": "./steamcmd/steamcmd.exe"
