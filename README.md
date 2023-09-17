@@ -30,7 +30,7 @@ Upon the initial startup, a browser window will open and prompt you to authentic
   - Create a new project or use an existing one.
   - Navigate to **"APIs & Services" > "Credentials"**.
   - Create a new OAuth client ID and download the credentials.
-  - During OAuth consent screen configuration, use External and add your build servers email as a test user
+  - During OAuth consent screen configuration, use External and add your steam partner build account email as a test user
   - Save the downloaded `credentials.json` file in the same directory as your SteamGuardDog application.
 
   Make sure to enable the Gmail API for your project: Navigate to **"APIs & Services" > "Dashboard"**, click on **"+ ENABLE APIS AND SERVICES"**, search for "Gmail API" and enable it.
