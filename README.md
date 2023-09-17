@@ -15,7 +15,7 @@ For a hassle-free experience, pre-compiled binaries for SteamGuardDog are availa
 Upon the initial startup, a browser window will open and prompt you to authenticate with your Gmail account. Once you've done that, you can use SteamGuardDog just like you would use SteamCmd. For example:
 
 ```bash
-./SteamGuardDog.exe +login username password +run_app_build /path/to/appconfig.vdf +quit
+./SteamGuardDog.exe +login username password +run_app_build /path/to/appconfig.vdf
 ```
 
 ## Installation Instructions
